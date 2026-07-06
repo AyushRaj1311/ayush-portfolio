@@ -35,6 +35,52 @@ function appendContactMessage(payload) {
   }
 }
 
+function createMailTransporter() {
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+  const smtpPort = parseInt(process.env.SMTP_PORT || '587', 10);
+  const smtpSecure = process.env.SMTP_SECURE === 'true';
+  const smtpService = process.env.SMTP_SERVICE;
+  const sendgridApiKey = process.env.SENDGRID_API_KEY;
+
+  if (smtpHost && smtpUser && smtpPass) {
+    return nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpSecure,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass
+      }
+    });
+  }
+
+  if (sendgridApiKey) {
+    return nodemailer.createTransport({
+      host: 'smtp.sendgrid.net',
+      port: 587,
+      secure: false,
+      auth: {
+        user: 'apikey',
+        pass: sendgridApiKey
+      }
+    });
+  }
+
+  if (smtpService && smtpUser && smtpPass) {
+    return nodemailer.createTransport({
+      service: smtpService,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass
+      }
+    });
+  }
+
+  return null;
+}
+
 // Mock GitHub payload to return when API fails, is rate-limited, or offline
 const MOCK_GITHUB_DATA = {
   user: {
@@ -206,14 +252,11 @@ app.post('/api/contact/send', contactLimiter, async (req, res) => {
   // Console log for visibility
   console.log(`Received contact message from ${name} (${email}): Subject: "${subject}" - Message: "${message}"`);
 
-  // Check if SMTP is configured
-  const smtpHost = process.env.SMTP_HOST;
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPass = process.env.SMTP_PASS;
+  const transporter = createMailTransporter();
   const targetEmail = process.env.SMTP_TO || process.env.CONTACT_TO_EMAIL || 'ayushraj1385@gmail.com';
-  const fromEmail = process.env.SMTP_FROM || smtpUser || 'portfolio@localhost';
+  const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER || 'portfolio@localhost';
 
-  if (!smtpHost || !smtpUser || !smtpPass) {
+  if (!transporter) {
     const fallbackPayload = {
       timestamp: new Date().toISOString(),
       name,
@@ -223,24 +266,14 @@ app.post('/api/contact/send', contactLimiter, async (req, res) => {
     };
 
     appendContactMessage(fallbackPayload);
-    console.log('SMTP environment variables are not configured. Contact message was saved locally.');
-    return res.status(200).json({
-      success: true,
-      message: 'Message received. SMTP is not configured, so it was saved locally for review.'
+    console.log('SMTP is not configured. Contact message was saved locally.');
+    return res.status(500).json({
+      success: false,
+      error: 'SMTP is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS, or provide SENDGRID_API_KEY in Vercel environment variables.'
     });
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
-      auth: {
-        user: smtpUser,
-        pass: smtpPass
-      }
-    });
-
     const mailOptions = {
       from: `"${name}" <${fromEmail}>`,
       replyTo: email,
