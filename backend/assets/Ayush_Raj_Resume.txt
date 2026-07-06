@@ -1,0 +1,20 @@
+AYUSH RAJ
+aspiring Software Developer | Java & Web Developer
+
+Email: ayushraj1385@gmail.com
+LinkedIn: https://www.linkedin.com/in/ayush-raj-534206330/
+GitHub: https://github.com/AyushRaj1311
+
+SKILLS
+------
+Languages: Java, JavaScript, HTML5, CSS3
+Concepts: Data Structures & Algorithms, OOP
+Tools: Git, GitHub, VS Code
+
+PROJECTS
+--------
+ChessForge: github.com/AyushRaj1311/ChessForge
+Agentic AI IoT Security: github.com/AyushRaj1311/agentic-iot-security
+EduGuard: github.com/AyushRaj1311/eduguard
+
+Currently learning: Advanced DSA, Backend Development, System Design

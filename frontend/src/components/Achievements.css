@@ -1,0 +1,149 @@
+.achievements-section {
+  position: relative;
+  z-index: 2;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  width: 100%;
+}
+
+.achievement-card {
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Hover Glowing borders */
+.ach-border-cyan:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 25px rgba(0, 245, 255, 0.15);
+}
+
+.ach-border-purple:hover {
+  border-color: var(--secondary-color);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.15);
+}
+
+.ach-border-green:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 25px rgba(20, 241, 149, 0.15);
+}
+
+/* Icons */
+.achievement-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+.ach-icon-cyan {
+  background: rgba(0, 245, 255, 0.05);
+  border-color: rgba(0, 245, 255, 0.2);
+  color: var(--primary-color);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.1);
+}
+
+.ach-icon-purple {
+  background: rgba(124, 58, 237, 0.05);
+  border-color: rgba(124, 58, 237, 0.2);
+  color: var(--secondary-color);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.1);
+}
+
+.ach-icon-green {
+  background: rgba(20, 241, 149, 0.05);
+  border-color: rgba(20, 241, 149, 0.2);
+  color: var(--accent-color);
+  box-shadow: 0 0 12px rgba(20, 241, 149, 0.1);
+}
+
+.achievement-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.achievement-tag-text {
+  font-family: var(--font-hud);
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.achievement-title-text {
+  font-family: var(--font-space);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.achievement-desc-text {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Decorative card micro dot indicators */
+.card-decor-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.achievement-card:hover .card-decor-dot {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+.card-decor-dot.top-r {
+  top: 15px;
+  right: 15px;
+}
+
+.card-decor-dot.bottom-l {
+  bottom: 15px;
+  left: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .achievements-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

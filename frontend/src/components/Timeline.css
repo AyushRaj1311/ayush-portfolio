@@ -1,0 +1,216 @@
+.timeline-section {
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  margin-top: 50px;
+}
+
+/* Center line */
+.timeline-center-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-glow-progress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--accent-color),
+    var(--primary-color)
+  );
+  box-shadow: 0 0 10px var(--primary-color);
+  opacity: 0.6;
+}
+
+/* Items */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  margin-bottom: 60px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-item.left {
+  left: 0;
+  padding-right: 45px;
+  transform: translateX(-50px);
+}
+
+.timeline-item.right {
+  left: 50%;
+  padding-left: 45px;
+  transform: translateX(50px);
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Badges */
+.timeline-badge {
+  position: absolute;
+  top: 15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-darker);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item.left .timeline-badge {
+  right: -18px;
+}
+
+.timeline-item.right .timeline-badge {
+  left: -18px;
+}
+
+/* Badge Glow Colors */
+.badge-cyan {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+}
+.badge-purple {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.2);
+}
+.badge-green {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(20, 241, 149, 0.2);
+}
+
+.timeline-item:hover .timeline-badge {
+  transform: scale(1.15);
+}
+
+.timeline-item.left:hover .badge-cyan { box-shadow: 0 0 18px var(--primary-color); }
+.timeline-item.right:hover .badge-purple { box-shadow: 0 0 18px var(--secondary-color); }
+.timeline-item:hover .badge-green { box-shadow: 0 0 18px var(--accent-color); }
+
+/* Timeline Cards */
+.timeline-card {
+  padding: 30px;
+  position: relative;
+}
+
+.timeline-year {
+  font-family: var(--font-hud);
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.timeline-title-text {
+  font-family: var(--font-space);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.timeline-subtitle-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.timeline-desc-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Cyber corner decors for card */
+.card-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-style: solid;
+  pointer-events: none;
+  transition: border-color var(--transition-fast);
+}
+
+.timeline-card:hover .card-corner {
+  border-color: var(--primary-color);
+}
+
+.card-corner.top-l {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.card-corner.bottom-r {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+/* Responsive timeline */
+@media (max-width: 768px) {
+  .timeline-center-line {
+    left: 20px;
+    transform: none;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .timeline-item.left {
+    padding-right: 0;
+    padding-left: 45px;
+    transform: translateX(30px);
+  }
+
+  .timeline-item.right {
+    left: 0;
+    padding-left: 45px;
+    transform: translateX(30px);
+  }
+
+  .timeline-item.left .timeline-badge,
+  .timeline-item.right .timeline-badge {
+    left: 2px;
+    right: auto;
+  }
+
+  .timeline-card {
+    padding: 20px;
+  }
+  
+  .timeline-title-text {
+    font-size: 1.15rem;
+  }
+}
