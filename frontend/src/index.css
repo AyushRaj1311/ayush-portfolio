@@ -308,12 +308,35 @@ section {
 @media (max-width: 768px) {
   section {
     padding: 60px 4% 60px 4%;
+    min-height: auto;
   }
+
   .section-title {
     font-size: 2rem;
     margin-bottom: 30px;
   }
+
   * {
     cursor: auto !important; /* Restore normal cursor on mobile/touch screens */
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 56px 4% 56px 4%;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+    margin-bottom: 24px;
+  }
+
+  .section-title::after {
+    font-size: 1.25rem;
+    margin-left: 6px;
+  }
+
+  .glass-panel {
+    border-radius: 14px;
   }
 }

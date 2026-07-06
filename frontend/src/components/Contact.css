@@ -259,6 +259,7 @@ a.detail-value:hover {
   .contact-layout-grid {
     grid-template-columns: 1fr;
   }
+
   .contact-info-panel {
     height: auto;
   }
@@ -268,7 +269,38 @@ a.detail-value:hover {
   .form-row {
     grid-template-columns: 1fr;
   }
+
   .contact-form-panel {
-    padding: 25px;
+    padding: 24px 20px;
+  }
+
+  .contact-info-panel {
+    padding: 24px 20px;
+  }
+
+  .contact-social-grid {
+    flex-wrap: wrap;
+  }
+
+  .social-badge {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-panel,
+  .contact-info-panel {
+    padding: 20px 16px;
+  }
+
+  .social-badge {
+    flex-basis: 100%;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px 14px;
+    font-size: 0.88rem;
   }
 }

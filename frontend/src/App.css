@@ -46,6 +46,30 @@
   gap: 24px;
 }
 
+.mobile-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobile-nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  border-radius: 999px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
 .nav-links button {
   background: transparent;
   border: none;
@@ -164,17 +188,90 @@
 /* Responsive navigation */
 @media (max-width: 1024px) {
   .nav-links {
-    display: none; /* Hide standard links, scroll works on actions */
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    max-width: calc(100vw - 220px);
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links button {
+    white-space: nowrap;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .nav-links button::after {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .cinematic-nav {
+    padding: 14px 4%;
+    gap: 12px;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+  }
+
+  .nav-logo {
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 4%;
+    left: 4%;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(2, 4, 11, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-links.mobile-open {
+    display: flex;
+  }
+
+  .nav-links button {
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .nav-hud-time {
+    display: none;
+  }
+
+  .portfolio-content {
+    margin-top: 72px;
   }
 }
 
 @media (max-width: 576px) {
   .cinematic-nav {
-    padding: 15px 4%;
+    padding: 12px 4%;
+    flex-wrap: wrap;
   }
-  .nav-hud-time {
-    display: none; /* Hide time widget on small mobiles */
-  }
+
   .footer-content {
     flex-direction: column;
     text-align: center;

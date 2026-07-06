@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
@@ -13,6 +13,7 @@ import './App.css';
 
 export default function App() {
   const canvasRef = useRef(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Initialize Lenis smooth scrolling immediately
   useEffect(() => {
@@ -36,6 +37,17 @@ export default function App() {
     return () => {
       lenis.destroy();
     };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Starfield & Telemetry background loop
@@ -130,6 +142,7 @@ export default function App() {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -149,7 +162,17 @@ export default function App() {
             <div className="nav-logo" onClick={() => handleScrollTo('home')}>
               AYUSH_RAJ<span className="logo-suffix">//</span>
             </div>
-            <nav className="nav-links">
+            <button
+              className="mobile-nav-toggle"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              aria-label="Toggle navigation"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <nav className={`nav-links${isMobileMenuOpen ? ' mobile-open' : ''}`}>
               <button onClick={() => handleScrollTo('home')}>HOME</button>
               <button onClick={() => handleScrollTo('stats')}>METRICS</button>
               <button onClick={() => handleScrollTo('timeline')}>TIMELINE</button>

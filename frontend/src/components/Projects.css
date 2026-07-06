@@ -47,10 +47,14 @@
   display: flex;
   gap: 30px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   padding: 20px 10px 40px 10px;
   scrollbar-width: none; /* Hide scrollbars */
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
 }
 
 .projects-carousel::-webkit-scrollbar {
@@ -62,6 +66,7 @@
   width: 330px;
   height: 460px;
   flex-shrink: 0;
+  touch-action: pan-x;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -309,14 +314,56 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .projects-carousel {
+    gap: 18px;
+    padding: 16px 4px 28px 4px;
+  }
+
   .project-poster {
-    width: 290px;
+    width: min(84vw, 300px);
     height: 430px;
   }
+
   .project-poster:hover {
     height: 480px;
   }
+
   .poster-media-area {
     height: 150px;
   }
 }
+
+@media (max-width: 480px) {
+  .projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .carousel-nav-buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .project-poster {
+    width: min(86vw, 280px);
+    height: 400px;
+  }
+
+  .project-poster:hover {
+    height: 450px;
+  }
+
+  .poster-details {
+    padding: 18px;
+  }
+
+  .poster-title {
+    font-size: 1.12rem;
+  }
+
+  .poster-description {
+    font-size: 0.8rem;
+  }
+}
+
