@@ -215,17 +215,53 @@
 }
 
 @media (max-width: 768px) {
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
   .skills-categories-bar {
     justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .category-btn {
+    padding: 8px 12px;
+    font-size: 0.64rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .skill-card {
+    height: 190px;
+    padding: 20px 14px;
+  }
+
+  .skill-progress-ring {
+    width: 68px;
+    height: 68px;
+  }
+
+  .skill-name-text {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .skill-card {
+    height: 170px;
+    padding: 18px 12px;
+  }
+
+  .skill-progress-ring {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skill-name-text {
+    font-size: 0.95rem;
   }
 }
