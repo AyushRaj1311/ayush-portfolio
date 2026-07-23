@@ -7,9 +7,9 @@ GitHub: https://github.com/AyushRaj1311
 
 SKILLS
 ------
-Languages: Java, JavaScript, HTML5, CSS3
-Concepts: Data Structures & Algorithms, OOP
-Tools: Git, GitHub, VS Code
+Languages & Frameworks: Java, JavaScript, C, Python, SQL, TypeScript, React.js, Node.js, Express.js
+Tools & Technologies: Git, GitHub, VS Code, Docker, MongoDB, MySQL, Oracle DBMS, Tailwind CSS
+Concepts & Security: Data Structures and Algorithms (DSA), OOP, Agentic AI, IoT Security, RESTful APIs
 
 PROJECTS
 --------
